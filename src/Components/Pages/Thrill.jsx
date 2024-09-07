@@ -23,7 +23,7 @@ function Thrill() {
   const thrillMovies = movies.filter((movie) => movie.Category === "Thrill");
   return (
     <div>
-      <h2>Drama</h2>
+      <h2>Thriller</h2>
       <Link to="/">
         <button>Home</button>
       </Link>

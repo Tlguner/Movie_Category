@@ -24,7 +24,7 @@ function Horror() {
 
   return (
     <div>
-      <h2>Drama</h2>
+      <h2>Horror</h2>
       <Link to="/">
         <button>Home</button>
       </Link>

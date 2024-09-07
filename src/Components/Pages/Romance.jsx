@@ -23,7 +23,7 @@ function Romance() {
   const romanceMovies = movies.filter((movie) => movie.Category === "Romance");
   return (
     <div>
-      <h2>Drama</h2>
+      <h2>Romance</h2>
       <Link to="/">
         <button>Home</button>
       </Link>

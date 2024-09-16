@@ -21,7 +21,7 @@ const movie = [
     id: 4,
     title: "Alien: Covenant | Official Trailer",
     URL: "svnAD0TApb8",
-    Category: "Thrill",
+    Category: "Thriller",
   },
   {
     id: 5,
@@ -87,13 +87,13 @@ const movie = [
     id: 15,
     title: "Pearl | Official Trailer  ",
     URL: "L5PW5r3pEOg",
-    Category: "Thrill",
+    Category: "Thriller",
   },
   {
     id: 16,
     title: "Inception (2010) Official Trailer",
     URL: "YoHD9XEInc0",
-    Category: "Thrill",
+    Category: "Thriller",
   },
   {
     id: 17,

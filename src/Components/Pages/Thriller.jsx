@@ -4,25 +4,25 @@ import movies from "../data"; // Array holding the movie information
 import Button from "../button";
 import HomeButton from "./HomeButton";
 
-function Drama() {
+function Thriller() {
   var [currentVideoIndex, setCurrentVideoIndex] = useState(0);
 
-  const dramaMovies = movies.filter((movie) => movie.Category === "Drama");
+  const thrillMovies = movies.filter((movie) => movie.Category === "Thriller");
   return (
     <div>
       <HomeButton />
       <div>
-        <div className="drama-card">
+        <div className="triller-card">
           {/* Render only the current movie */}
           <YoutubePlayer
-            title={dramaMovies[currentVideoIndex].title}
-            URL={dramaMovies[currentVideoIndex].URL}
+            title={thrillMovies[currentVideoIndex].title}
+            URL={thrillMovies[currentVideoIndex].URL}
           />
           {/* Navigation buttons */}
           <Button
             currentVideoIndex={currentVideoIndex}
             setCurrentVideoIndex={setCurrentVideoIndex}
-            movies={dramaMovies}
+            movies={thrillMovies}
           />
         </div>
       </div>
@@ -30,4 +30,4 @@ function Drama() {
   );
 }
 
-export default Drama;
+export default Thriller;

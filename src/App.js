@@ -1,12 +1,12 @@
 import { HashRouter as Router, Routes, Route } from "react-router-dom";
-import Home from "./Components/Pages/Home";
-import Movie from "./Components/Pages/movie";
-import Comedy from "./Components/Pages/Comedy";
-import Action from "./Components/Pages/Action";
-import Drama from "./Components/Pages/Drama";
-import Thrill from "./Components/Pages/Thrill";
-import Horror from "./Components/Pages/Horror";
-import Romance from "./Components/Pages/Romance";
+import Home from "./Components/Pages/Home.jsx";
+import Movie from "./Components/Pages/movie.jsx";
+import Comedy from "./Components/Pages/Comedy.jsx";
+import Action from "./Components/Pages/Action.jsx";
+import Drama from "./Components/Pages/Drama.jsx";
+import Thriller from "./Components/Pages/Thriller.jsx";
+import Horror from "./Components/Pages/Horror.jsx";
+import Romance from "./Components/Pages/Romance.jsx";
 import "./App.css";
 
 function App() {
@@ -20,7 +20,7 @@ function App() {
             <Route path="/Comedy" element={<Comedy />} />
             <Route path="/Action" element={<Action />} />
             <Route path="/Drama" element={<Drama />} />
-            <Route path="/Thrill" element={<Thrill />} />
+            <Route path="/Thriller" element={<Thriller />} />
             <Route path="/Horror" element={<Horror />} />
             <Route path="/Romance" element={<Romance />} />
           </Routes>

@@ -1,49 +1,30 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 import YoutubePlayer from "../youtube";
 import movies from "../data"; // Array holding the movie information
+import Button from "../button";
+import HomeButton from "./HomeButton";
 
 function Comedy() {
   var [currentVideoIndex, setCurrentVideoIndex] = useState(0);
-
-  // Function to go to the next movie
-  const handleNext = () => {
-    if (currentVideoIndex < movies.length - 1) {
-      setCurrentVideoIndex(currentVideoIndex + 1);
-    }
-  };
-
-  // Function to go to the previous movie
-  const handlePrev = () => {
-    if (currentVideoIndex > 0) {
-      setCurrentVideoIndex(currentVideoIndex - 1);
-    }
-  };
 
   const comedyMovies = movies.filter((movie) => movie.Category === "Comedy");
   return (
     <div>
       <h2>Comedy</h2>
-      <Link to="/">
-        <button>Home</button>
-      </Link>
+      <HomeButton />
       <div>
-        <div>
+        <div className="comedy-card">
           {/* Render only the current movie */}
           <YoutubePlayer
             title={comedyMovies[currentVideoIndex].title}
             URL={comedyMovies[currentVideoIndex].URL}
           />
           {/* Navigation buttons */}
-          <button onClick={handlePrev} disabled={currentVideoIndex === 0}>
-            Previous
-          </button>
-          <button
-            onClick={handleNext}
-            disabled={currentVideoIndex === comedyMovies.length - 1}
-          >
-            Next
-          </button>
+          <Button
+            currentVideoIndex={currentVideoIndex}
+            setCurrentVideoIndex={setCurrentVideoIndex}
+            movies={comedyMovies}
+          />
         </div>
       </div>
     </div>

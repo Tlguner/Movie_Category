@@ -14,20 +14,42 @@ function Home() {
     }
     return false;
   });
+  //fetch movies from backendAPI
+  const fetchMovies = async () => {
+    try {
+      let response = await fetch("http:localhost:5000/api/movies");
+      const data = await response.json();
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  function HandleClick() {
+    fetchMovies();
+  }
+
   return (
     <div>
-      <h2>Home</h2>
+      <h2 className="home-header">Home</h2>
+
+      {/*test*/}
+
       <Link to="/movie">
+        {" "}
+        FOR DEBUGGING
         <button>Movie Page</button>
       </Link>
 
       {uniqueMovies.map((movie) => (
         <Link to={`/${movie.Category.toLowerCase()}`}>
-          <button className="movie-btn" key={movie.id}>
+          {/* Dynamically apply a CSS class based on the category */}
+          <button className={`movie-btn ${movie.Category.toLowerCase()}-btn`}>
             {movie.Category}
           </button>
         </Link>
       ))}
+      <button onClick={HandleClick()}>press</button>
     </div>
   );
 }

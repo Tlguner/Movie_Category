@@ -1,30 +1,54 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import YoutubePlayer from "../youtube";
-import movies from "../data"; // Array holding the movie information
 import Button from "../button";
+import axios from "axios";
 import HomeButton from "./HomeButton";
 
 function Romance() {
-  var [currentVideoIndex, setCurrentVideoIndex] = useState(0);
+  const [actionMovies, setActionMovies] = useState([]);
+  const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
 
-  const romanceMovies = movies.filter((movie) => movie.Category === "Romance");
+  // Fetch action movies from the server
+  useEffect(() => {
+    const fetchMovies = async () => {
+      try {
+        const response = await axios.get(
+          "http://192.168.1.129:5000/api/movies"
+        );
+        const filteredMovies = response.data.filter(
+          (movie) => movie.category === "Romance"
+        );
+        setActionMovies(filteredMovies);
+      } catch (error) {
+        console.error("Error fetching movies:", error);
+      }
+    };
+
+    fetchMovies();
+  }, []);
+
   return (
     <div>
       <h2>Romance</h2>
       <HomeButton />
       <div>
         <div className="romance-card">
-          {/* Render only the current movie */}
-          <YoutubePlayer
-            title={romanceMovies[currentVideoIndex].title}
-            URL={romanceMovies[currentVideoIndex].URL}
-          />
-          {/* Navigation buttons */}
-          <Button
-            currentVideoIndex={currentVideoIndex}
-            setCurrentVideoIndex={setCurrentVideoIndex}
-            movies={romanceMovies}
-          />
+          {/* Render only the current movie if data is available */}
+          {actionMovies.length > 0 && (
+            <>
+              <YoutubePlayer
+                title={actionMovies[currentVideoIndex].title}
+                URL={actionMovies[currentVideoIndex].url}
+              />
+              {/* Navigation buttons */}
+              <Button
+                className="romance-btn"
+                currentVideoIndex={currentVideoIndex}
+                setCurrentVideoIndex={setCurrentVideoIndex}
+                movies={actionMovies}
+              />
+            </>
+          )}
         </div>
       </div>
     </div>

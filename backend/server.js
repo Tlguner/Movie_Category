@@ -10,7 +10,11 @@ connectDB();
 // Middleware to parse JSON
 app.use(express.json());
 // CORS'u etkinleştirin
-app.use(cors());
+app.use(
+  cors({
+    origin: "*",
+  })
+);
 // Route to get all movies
 app.get("/api/movies", async (req, res) => {
   try {

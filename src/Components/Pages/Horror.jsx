@@ -1,13 +1,31 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import YoutubePlayer from "../youtube";
-import movies from "../data"; // Array holding the movie information
 import Button from "../button";
+import axios from "axios";
 import HomeButton from "./HomeButton";
 
 function Horror() {
-  var [currentVideoIndex, setCurrentVideoIndex] = useState(0);
+  const [actionMovies, setActionMovies] = useState([]);
+  const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
 
-  const horrorMovies = movies.filter((movie) => movie.Category === "Horror");
+  // Fetch action movies from the server
+  useEffect(() => {
+    const fetchMovies = async () => {
+      try {
+        const response = await axios.get(
+          "http://192.168.1.129:5000/api/movies"
+        );
+        const filteredMovies = response.data.filter(
+          (movie) => movie.category === "Horror"
+        );
+        setActionMovies(filteredMovies);
+      } catch (error) {
+        console.error("Error fetching movies:", error);
+      }
+    };
+
+    fetchMovies();
+  }, []);
 
   return (
     <div>
@@ -15,17 +33,22 @@ function Horror() {
       <HomeButton />
       <div>
         <div className="horror-card">
-          {/* Render only the current movie */}
-          <YoutubePlayer
-            title={horrorMovies[currentVideoIndex].title}
-            URL={horrorMovies[currentVideoIndex].URL}
-          />
-          {/* Navigation buttons */}
-          <Button
-            currentVideoIndex={currentVideoIndex}
-            setCurrentVideoIndex={setCurrentVideoIndex}
-            movies={horrorMovies}
-          />
+          {/* Render only the current movie if data is available */}
+          {actionMovies.length > 0 && (
+            <>
+              <YoutubePlayer
+                title={actionMovies[currentVideoIndex].title}
+                URL={actionMovies[currentVideoIndex].url}
+              />
+              {/* Navigation buttons */}
+              <Button
+                className="horror-btn"
+                currentVideoIndex={currentVideoIndex}
+                setCurrentVideoIndex={setCurrentVideoIndex}
+                movies={actionMovies}
+              />
+            </>
+          )}
         </div>
       </div>
     </div>

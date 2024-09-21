@@ -1,29 +1,54 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import YoutubePlayer from "../youtube";
-import movies from "../data"; // Array holding the movie information
 import Button from "../button";
+import axios from "axios";
 import HomeButton from "./HomeButton";
 
 function Thriller() {
-  var [currentVideoIndex, setCurrentVideoIndex] = useState(0);
+  const [actionMovies, setActionMovies] = useState([]);
+  const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
 
-  const thrillMovies = movies.filter((movie) => movie.Category === "Thriller");
+  // Fetch action movies from the server
+  useEffect(() => {
+    const fetchMovies = async () => {
+      try {
+        const response = await axios.get(
+          "http://192.168.1.129:5000/api/movies"
+        );
+        const filteredMovies = response.data.filter(
+          (movie) => movie.category === "Thriller"
+        );
+        setActionMovies(filteredMovies);
+      } catch (error) {
+        console.error("Error fetching movies:", error.message);
+      }
+    };
+
+    fetchMovies();
+  }, []);
+
   return (
     <div>
+      <h2>Thriller</h2>
       <HomeButton />
       <div>
         <div className="triller-card">
-          {/* Render only the current movie */}
-          <YoutubePlayer
-            title={thrillMovies[currentVideoIndex].title}
-            URL={thrillMovies[currentVideoIndex].URL}
-          />
-          {/* Navigation buttons */}
-          <Button
-            currentVideoIndex={currentVideoIndex}
-            setCurrentVideoIndex={setCurrentVideoIndex}
-            movies={thrillMovies}
-          />
+          {/* Render only the current movie if data is available */}
+          {actionMovies.length > 0 && (
+            <>
+              <YoutubePlayer
+                title={actionMovies[currentVideoIndex].title}
+                URL={actionMovies[currentVideoIndex].url}
+              />
+              {/* Navigation buttons */}
+              <Button
+                className="triller-btn"
+                currentVideoIndex={currentVideoIndex}
+                setCurrentVideoIndex={setCurrentVideoIndex}
+                movies={actionMovies}
+              />
+            </>
+          )}
         </div>
       </div>
     </div>

@@ -17,17 +17,13 @@ function Home() {
   //fetch movies from backendAPI
   const fetchMovies = async () => {
     try {
-      let response = await fetch("http:localhost:5000/api/movies");
+      let response = await fetch("http://192.168.1.129:5000/api/movies");
       const data = await response.json();
       console.log(data);
     } catch (error) {
       console.log(error);
     }
   };
-
-  function HandleClick() {
-    fetchMovies();
-  }
 
   return (
     <div>
@@ -49,7 +45,6 @@ function Home() {
           </button>
         </Link>
       ))}
-      <button onClick={HandleClick()}>press</button>
     </div>
   );
 }

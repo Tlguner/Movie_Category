@@ -1,33 +1,23 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import YoutubePlayer from "../youtube";
-//import movies from "../data"; // Array holding the movie information
-import Button from "../button";
-import useDebounce from "../hooks/useDebounce"; // Import the debounce hook
+import YoutubePlayer from "../youtube"; // Correct reference to youtube.jsx
 import axios from "axios";
+import Button from "../button"; // Correct reference to button.jsx
 
 function Movie() {
-  {
-    /*
-  // State to track the current movie index
-  const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
-  const debouncedVideoIndex = useDebounce(currentVideoIndex, 300); // 100ms debounce delay
-  const [currentVideo, setCurrentVideo] = useState(movies[0]);
+  const [test, setTest] = useState([]); // Movies fetched from the server
+  const [currentVideoIndex, setCurrentVideoIndex] = useState(0); // Track the current video index
+  const [currentVideo, setCurrentVideo] = useState(null); // Store the current video data
 
-  // Update the current video whenever the debounced index changes
-  useEffect(() => {
-    setCurrentVideo(movies[debouncedVideoIndex]);
-  }, [debouncedVideoIndex, movies]);
-*/
-  }
-  //test
-  const [test, setTest] = useState([]);
-
+  // Fetch movies from the server when the component mounts
   useEffect(() => {
     const fetchMovies = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/movies");
-        setTest(response.data);
+        const response = await axios.get(
+          "http://192.168.1.129:5000/api/movies"
+        );
+        setTest(response.data); // Store fetched movies in the state
+        setCurrentVideo(response.data[0]); // Set the first movie as the initial current video
       } catch (error) {
         console.error("Error fetching movies:", error);
       }
@@ -35,6 +25,14 @@ function Movie() {
 
     fetchMovies();
   }, []);
+
+  // Update the current video when the currentVideoIndex changes
+  useEffect(() => {
+    if (test.length > 0) {
+      setCurrentVideo(test[currentVideoIndex]);
+    }
+  }, [currentVideoIndex, test]);
+
   return (
     <div>
       <div>
@@ -44,27 +42,28 @@ function Movie() {
         </Link>
       </div>
       <div className="card">
-        {/*
+        {/* Conditionally render the YouTube player if currentVideo is available */}
         {currentVideo && (
           <YoutubePlayer
-            key={currentVideo.URL} // Force re-render by changing the key
-            URL={currentVideo.URL}
-            title={currentVideo.title}
+            key={currentVideo._id} // Unique key for re-rendering
+            URL={currentVideo.url} // Pass the video URL from the fetched data
+            title={currentVideo.title} // Pass the video title from the fetched data
           />
         )}
-        
+
+        {/* Pass the necessary props to the Button component for navigation */}
         <Button
           currentVideoIndex={currentVideoIndex}
           setCurrentVideoIndex={setCurrentVideoIndex}
-          movies={movies}
+          movies={test} // Pass the fetched movies for navigation
         />
-        */}
-        {/* getting the data from the db*/}
+
+        {/* Display the fetched movies */}
         <div>
           <h1>Movies</h1>
           <ul>
-            {test.map((test) => (
-              <li key={test._id}>{test.title}</li>
+            {test.map((movie) => (
+              <li key={movie._id}>{movie.title}</li>
             ))}
           </ul>
         </div>

@@ -1,49 +1,54 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
 import YoutubePlayer from "../youtube";
-import movies from "../data"; // Array holding the movie information
+import Button from "../button";
+import axios from "axios";
+import HomeButton from "./HomeButton";
 
 function Romance() {
-  var [currentVideoIndex, setCurrentVideoIndex] = useState(0);
+  const [actionMovies, setActionMovies] = useState([]);
+  const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
 
-  // Function to go to the next movie
-  const handleNext = () => {
-    if (currentVideoIndex < movies.length - 1) {
-      setCurrentVideoIndex(currentVideoIndex + 1);
-    }
-  };
+  // Fetch action movies from the server
+  useEffect(() => {
+    const fetchMovies = async () => {
+      try {
+        const response = await axios.get(
+          "http://192.168.1.129:5000/api/movies"
+        );
+        const filteredMovies = response.data.filter(
+          (movie) => movie.category === "Romance"
+        );
+        setActionMovies(filteredMovies);
+      } catch (error) {
+        console.error("Error fetching movies:", error);
+      }
+    };
 
-  // Function to go to the previous movie
-  const handlePrev = () => {
-    if (currentVideoIndex > 0) {
-      setCurrentVideoIndex(currentVideoIndex - 1);
-    }
-  };
+    fetchMovies();
+  }, []);
 
-  const romanceMovies = movies.filter((movie) => movie.Category === "Romance");
   return (
     <div>
       <h2>Romance</h2>
-      <Link to="/">
-        <button>Home</button>
-      </Link>
+      <HomeButton />
       <div>
-        <div>
-          {/* Render only the current movie */}
-          <YoutubePlayer
-            title={romanceMovies[currentVideoIndex].title}
-            URL={romanceMovies[currentVideoIndex].URL}
-          />
-          {/* Navigation buttons */}
-          <button onClick={handlePrev} disabled={currentVideoIndex === 0}>
-            Previous
-          </button>
-          <button
-            onClick={handleNext}
-            disabled={currentVideoIndex === romanceMovies.length - 1}
-          >
-            Next
-          </button>
+        <div className="romance-card">
+          {/* Render only the current movie if data is available */}
+          {actionMovies.length > 0 && (
+            <>
+              <YoutubePlayer
+                title={actionMovies[currentVideoIndex].title}
+                URL={actionMovies[currentVideoIndex].url}
+              />
+              {/* Navigation buttons */}
+              <Button
+                className="romance-btn"
+                currentVideoIndex={currentVideoIndex}
+                setCurrentVideoIndex={setCurrentVideoIndex}
+                movies={actionMovies}
+              />
+            </>
+          )}
         </div>
       </div>
     </div>

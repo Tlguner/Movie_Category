@@ -4,7 +4,7 @@ import Button from "../button";
 import axios from "axios";
 import HomeButton from "./HomeButton";
 
-function Horror() {
+function Thriller() {
   const [actionMovies, setActionMovies] = useState([]);
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
 
@@ -16,11 +16,11 @@ function Horror() {
           "http://192.168.1.129:5000/api/movies"
         );
         const filteredMovies = response.data.filter(
-          (movie) => movie.category === "Horror"
+          (movie) => movie.category === "Thriller"
         );
         setActionMovies(filteredMovies);
       } catch (error) {
-        console.error("Error fetching movies:", error);
+        console.error("Error fetching movies:", error.message);
       }
     };
 
@@ -29,10 +29,10 @@ function Horror() {
 
   return (
     <div>
-      <h2>Horror</h2>
+      <h2>Thriller</h2>
       <HomeButton />
       <div>
-        <div className="horror-card">
+        <div className="triller-card">
           {/* Render only the current movie if data is available */}
           {actionMovies.length > 0 && (
             <>
@@ -42,7 +42,7 @@ function Horror() {
               />
               {/* Navigation buttons */}
               <Button
-                className="horror-btn"
+                className="triller-btn"
                 currentVideoIndex={currentVideoIndex}
                 setCurrentVideoIndex={setCurrentVideoIndex}
                 movies={actionMovies}
@@ -55,4 +55,4 @@ function Horror() {
   );
 }
 
-export default Horror;
+export default Thriller;

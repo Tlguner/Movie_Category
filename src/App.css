@@ -1,16 +1,6 @@
+/* Main app styling */
 .App {
   text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
 }
 
 .App-header {
@@ -24,30 +14,278 @@
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+/* Responsive header text */
+.home-header {
+  font-size: 3.5em;
 }
 
-@keyframes App-logo-spin {
-  from {
+.video-name-header {
+  font-size: 1.5rem;
+}
+
+/* Responsive header adjustments */
+@media (max-width: 768px) {
+  .home-header {
+    font-size: 2.5em;
+  }
+  .video-name-header {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .home-header {
+    font-size: 2em;
+  }
+  .video-name-header {
+    font-size: 1rem;
+  }
+}
+
+/* Base button styles */
+.movie-btn {
+  padding: 0.5em 1em;
+  font-size: 1rem;
+  border-radius: 5px;
+  margin: 0.5em;
+  cursor: pointer;
+  border: none;
+  width: 20%;
+  max-width: 200px;
+  min-width: 100px;
+  transition: all 0.3s ease;
+}
+
+/* Hover effect for buttons */
+.movie-btn:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transform: scale(1.15);
+}
+
+/* Responsive styles for buttons */
+@media (max-width: 1200px) {
+  .movie-btn {
+    width: 30%;
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 992px) {
+  .movie-btn {
+    width: 40%;
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .movie-btn {
+    width: 50%;
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .movie-btn {
+    width: 70%;
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .movie-btn {
+    width: 90%;
+    font-size: 1.3rem;
+  }
+}
+
+/* Category card styling */
+.action-card,
+.comedy-card,
+.drama-card,
+.triller-card,
+.horror-card,
+.romance-card {
+  width: 450px;
+  border-radius: 10px;
+  padding-bottom: 20px;
+}
+
+/* Background colors for categories */
+.action-card {
+  background-color: #d32f2fb0;
+}
+
+.comedy-card {
+  background-color: #fdd835;
+}
+
+.drama-card {
+  background-color: #6a1b9a;
+}
+
+.triller-card {
+  background-color: #a8a6a8;
+}
+
+.horror-card {
+  background-color: #000000;
+}
+
+.romance-card {
+  background-color: #9a1b76;
+}
+
+/* Custom styles for each category button */
+.comedy-btn {
+  background-color: #fdd835;
+  color: #212121;
+}
+
+.action-btn {
+  background-color: #d32f2fb0;
+  color: white;
+}
+
+.horror-btn {
+  background-color: #000000;
+  color: white;
+}
+
+.drama-btn {
+  background-color: #6a1b9a;
+  color: white;
+}
+
+.romance-btn {
+  background-color: #9a1b76;
+  color: white;
+}
+
+.thriller-btn {
+  background-color: #a8a6a8;
+  color: white;
+}
+
+/* Navigation button styles */
+.next-btn,
+.back-btn,
+.home-btn {
+  padding: 1%;
+  padding-right: 5%;
+  padding-left: 5%;
+  border-radius: 5px;
+}
+
+.home-btn {
+  padding: 2%;
+}
+
+/* Responsive buttons on smaller screens */
+@media (max-width: 768px) {
+  .next-btn,
+  .back-btn,
+  .home-btn {
+    padding: 1.5%;
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .next-btn,
+  .back-btn,
+  .home-btn {
+    padding: 2%;
+    font-size: 1.2rem;
+  }
+}
+
+/* Spinner styling */
+.spinner {
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  border-top: 4px solid #3498db;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@keyframes spin {
+  0% {
     transform: rotate(0deg);
   }
-  to {
+  100% {
     transform: rotate(360deg);
   }
 }
 
-.card {
+/* Youtube Player Container Styles */
+.youtube-player-container {
+  min-width: 350px;
   width: 450px;
-  background-color: red;
+  max-width: 800px;
+  margin: auto;
+  margin-top: 12px;
+  min-height: 150px;
   border-radius: 10px;
+  overflow: hidden;
+  position: relative;
 }
 
-.video-name-header {
-  font-size: 20px;
+/* Spinner Styles */
+.spinner {
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  border-top: 4px solid #3498db;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
-.movie-btn {
-  margin-left: 5px;
-  margin-right: 5px;
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .youtube-player-container {
+    width: 90%;
+    max-width: 450px;
+  }
+
+  .video-name-header {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .youtube-player-container {
+    width: 100%;
+  }
+
+  .video-name-header {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .youtube-player-container {
+    min-width: 300px;
+  }
+
+  .video-name-header {
+    font-size: 0.9rem;
+  }
 }

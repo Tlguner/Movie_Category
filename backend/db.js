@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-
+import dotenv from "dotenv";
 /*
 // Film şeması
 const movieSchema = new mongoose.Schema({
@@ -26,6 +26,9 @@ const connectDB = async () => {
 };
 */
 
+// Load environment variables from .env file
+dotenv.config();
+
 // Film şeması
 const movieSchema = new mongoose.Schema({
   title: String,
@@ -33,12 +36,9 @@ const movieSchema = new mongoose.Schema({
   category: String,
 });
 
-// Şemadan model oluştur
-const Movie = mongoose.model("movie", movieSchema);
-
 // MongoDB Atlas connection URI
-const MONGO_URI =
-  "mongodb+srv://tlguner:kMjjeTlDI9pR1ZrY@cluster0.p9sbb.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+const MONGO_URI = process.env.MONGO_URI;
+console.log("MongoDB URI:", MONGO_URI); // Check if this logs correctly
 
 // MongoDB'ye bağlanma fonksiyonu
 const connectDB = async () => {
@@ -47,11 +47,14 @@ const connectDB = async () => {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
-    console.log("MongoDB connected to Atlas...");
+    console.log("MongoDB connected...");
   } catch (err) {
     console.error(err.message);
     process.exit(1);
   }
 };
+
+// Şemadan model oluştur
+const Movie = mongoose.model("movie", movieSchema);
 
 export { connectDB, Movie };

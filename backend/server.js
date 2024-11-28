@@ -1,6 +1,10 @@
 import express from "express";
 import { connectDB, Movie } from "./db.js";
 import cors from "cors";
+import dotenv from "dotenv";
+
+// Load environment variables from .env file
+dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;

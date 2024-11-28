@@ -12,9 +12,7 @@ function Comedy() {
   useEffect(() => {
     const fetchMovies = async () => {
       try {
-        const response = await axios.get(
-          "http://192.168.1.129:5000/api/movies"
-        );
+        const response = await axios.get("http://localhost:5000/api/movies");
         const filteredMovies = response.data.filter(
           (movie) => movie.category === "Comedy"
         );

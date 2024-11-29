@@ -1,5 +1,5 @@
 // /api/movies.js
-import { connectDB, Movie } from "../../db.js";
+import { connectDB, Movie } from "./db.js";
 
 export default async function handler(req, res) {
   await connectDB(); // Ensure MongoDB connection

@@ -17,7 +17,7 @@ function Home() {
   //fetch movies from backendAPI
   const fetchMovies = async () => {
     try {
-      let response = await fetch("http://localhost:5000/api/movies");
+      let response = await fetch("/api/movies");
       const data = await response.json();
       console.log(data);
     } catch (error) {
@@ -29,13 +29,14 @@ function Home() {
     <div>
       <h2 className="home-header">Home</h2>
 
-      {/*test*/}
+      {/*test
 
       <Link to="/movie">
         {" "}
         FOR DEBUGGING
         <button>Movie Page</button>
       </Link>
+      */}
 
       {uniqueMovies.map((movie) => (
         <Link to={`/${movie.Category.toLowerCase()}`}>

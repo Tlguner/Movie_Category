@@ -13,7 +13,7 @@ function Movie() {
   useEffect(() => {
     const fetchMovies = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/movies");
+        const response = await axios.get("/api/movies");
         setTest(response.data); // Store fetched movies in the state
         setCurrentVideo(response.data[0]); // Set the first movie as the initial current video
       } catch (error) {

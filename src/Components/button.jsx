@@ -1,6 +1,6 @@
 import React from "react";
-import { MdNavigateNext } from "react-icons/md";
-import { IoIosArrowBack } from "react-icons/io";
+import { IoIosArrowRoundForward } from "react-icons/io";
+import { IoIosArrowRoundBack } from "react-icons/io";
 
 function Button({ movies, setCurrentVideoIndex, currentVideoIndex }) {
   // Function to go to the next movie
@@ -23,16 +23,16 @@ function Button({ movies, setCurrentVideoIndex, currentVideoIndex }) {
       <button
         onClick={handlePrev}
         disabled={currentVideoIndex === 0} // Disable the "Prev" button at the first video
-        className="next-btn"
+        className="back-btn"
       >
-        <IoIosArrowBack />
+        <IoIosArrowRoundBack className="arrow-icon" />
       </button>
       <button
         onClick={handleNext}
         disabled={currentVideoIndex === movies.length - 1} // Disable the "Next" button at the last video
-        className="back-btn"
+        className="next-btn"
       >
-        <MdNavigateNext />
+        <IoIosArrowRoundForward className="arrow-icon" />
       </button>
     </div>
   );

@@ -9,10 +9,11 @@ body {
   padding: 0;
   overflow-x: hidden; /* Prevent horizontal scrolling */
   width: 100%;
+  font-family: "Roboto", sans-serif;
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #353a45;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -28,7 +29,9 @@ body {
 }
 
 .video-name-header {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
+  padding-right: 1rem;
+  padding-left: 1rem;
 }
 
 /* Responsive header adjustments */
@@ -70,11 +73,52 @@ body {
   transform: scale(1.15);
 }
 
+.next-btn {
+  margin-left: 3%;
+}
+.back-btn {
+  margin-right: 3%;
+}
+
+.home-btn:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transform: scale(1.15);
+  transition: all 0.3s ease;
+}
+
+.next-btn:hover {
+  transform: scale(1.15);
+  transition: all 0.3s ease;
+  transform: translateX(10px); /* Moves the button 10px to the right */
+}
+.back-btn:hover {
+  transform: scale(1.15);
+  transition: all 0.3s ease;
+  transform: translateX(-10px); /* Moves the button 10px to the right */
+}
+
+.back-btn:disabled,
+.next-btn:disabled {
+  transform: none; /* Removes the scaling effect. */
+  box-shadow: none; /* Removes the shadow effect */
+  opacity: 0.6; /* Butonun daha az belirgin görünmesi için */
+  transition: none; /* Disables any animation or transition effects */
+}
+
 /* Responsive styles for buttons */
 @media (max-width: 1200px) {
   .movie-btn {
     width: 30%;
     font-size: 1.1rem;
+  }
+  .youtube-player-container {
+    width: 110%;
+  }
+  .action-card {
+    width: 110%;
+  }
+  .video-name-header {
+    font-size: 1rem;
   }
 }
 
@@ -83,6 +127,15 @@ body {
     width: 40%;
     font-size: 1.1rem;
   }
+  .youtube-player-container {
+    width: 100%;
+  }
+  .action-card {
+    width: 100%;
+  }
+  .video-name-header {
+    font-size: 1rem;
+  }
 }
 
 @media (max-width: 768px) {
@@ -90,19 +143,41 @@ body {
     width: 50%;
     font-size: 1.2rem;
   }
+  .youtube-player-container {
+    width: 100%;
+  }
+
+  .video-name-header {
+    font-size: 1rem;
+  }
 }
 
 @media (max-width: 576px) {
-  .movie-btn {
-    width: 70%;
-    font-size: 1.2rem;
+  .youtube-player-container {
+    width: 100%;
+  }
+
+  .video-name-header {
+    font-size: 0.8rem;
+  }
+  .action-card {
+    width: 100%;
   }
 }
 
 @media (max-width: 400px) {
   .movie-btn {
-    width: 90%;
+    width: 100%;
     font-size: 1.3rem;
+  }
+  .youtube-player-container {
+    max-width: 100%;
+  }
+  .action-card {
+    max-width: 100%;
+  }
+  .video-name-header {
+    font-size: 0.8rem;
   }
 }
 
@@ -110,47 +185,49 @@ body {
 .action-card,
 .comedy-card,
 .drama-card,
-.triller-card,
+.thriller-card,
 .horror-card,
 .romance-card {
-  width: 450px;
   border-radius: 10px;
   padding-bottom: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s, box-shadow 0.3s;
 }
 
 /* Background colors for categories */
 .action-card {
-  background-color: #d32f2fb0;
+  background-color: #a51d1d;
 }
 
 .comedy-card {
-  background-color: #fdd835;
+  background-color: #ffc300;
 }
 
 .drama-card {
-  background-color: #6a1b9a;
+  background-color: #8e44ad;
 }
 
 .triller-card {
-  background-color: #a8a6a8;
+  background-color: #4f4f4f;
 }
 
 .horror-card {
-  background-color: #000000;
+  background: linear-gradient(to bottom, #b20505, #000000);
 }
 
 .romance-card {
-  background-color: #9a1b76;
+  background-color: #ff69b4;
 }
 
 /* Custom styles for each category button */
 .comedy-btn {
-  background-color: #fdd835;
-  color: #212121;
+  background-color: #ffc300;
+  color: white;
 }
 
 .action-btn {
-  background-color: #d32f2fb0;
+  background-color: #a51d1d;
   color: white;
 }
 
@@ -160,17 +237,17 @@ body {
 }
 
 .drama-btn {
-  background-color: #6a1b9a;
+  background-color: #8e44ad;
   color: white;
 }
 
 .romance-btn {
-  background-color: #9a1b76;
+  background-color: #ff69b4;
   color: white;
 }
 
 .thriller-btn {
-  background-color: #a8a6a8;
+  background-color: #6e6e6e;
   color: white;
 }
 
@@ -178,33 +255,14 @@ body {
 .next-btn,
 .back-btn,
 .home-btn {
-  padding: 1%;
+  padding: 2%;
   padding-right: 5%;
   padding-left: 5%;
   border-radius: 5px;
 }
 
 .home-btn {
-  padding: 2%;
-}
-
-/* Responsive buttons on smaller screens */
-@media (max-width: 768px) {
-  .next-btn,
-  .back-btn,
-  .home-btn {
-    padding: 1.5%;
-    font-size: 1.1rem;
-  }
-}
-
-@media (max-width: 576px) {
-  .next-btn,
-  .back-btn,
-  .home-btn {
-    padding: 2%;
-    font-size: 1.2rem;
-  }
+  margin-bottom: 2%;
 }
 
 /* Spinner styling */
@@ -231,46 +289,15 @@ body {
 }
 
 /* Youtube Player Container Styles */
-.youtube-player-container {
-  min-width: 350px;
-  width: 450px;
-  max-width: 800px;
+.youtube-player-container,
+.action-card {
   margin: auto;
-  margin-top: 12px;
-  min-height: 150px;
   border-radius: 10px;
   overflow: hidden;
   position: relative;
 }
 
-/* Responsive Styles */
-@media (max-width: 768px) {
-  .youtube-player-container {
-    width: 90%;
-    max-width: 450px;
-  }
-
-  .video-name-header {
-    font-size: 1.2rem;
-  }
-}
-
-@media (max-width: 576px) {
-  .youtube-player-container {
-    width: 100%;
-  }
-
-  .video-name-header {
-    font-size: 1rem;
-  }
-}
-
-@media (max-width: 400px) {
-  .youtube-player-container {
-    min-width: 300px;
-  }
-
-  .video-name-header {
-    font-size: 0.9rem;
-  }
+.arrow-icon {
+  background: none; /* No background for the icon container */
+  color: black; /* Set the icon color */
 }

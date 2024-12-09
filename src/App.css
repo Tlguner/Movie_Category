@@ -30,8 +30,6 @@ body {
 
 .video-name-header {
   font-size: 1.4rem;
-  padding-right: 1rem;
-  padding-left: 1rem;
 }
 
 /* Responsive header adjustments */
@@ -45,12 +43,6 @@ body {
 }
 
 @media (max-width: 576px) {
-  .home-header {
-    font-size: 2em;
-  }
-  .video-name-header {
-    font-size: 1rem;
-  }
 }
 
 /* Base button styles */
@@ -75,9 +67,21 @@ body {
 
 .next-btn {
   margin-left: 3%;
+
+  border: none;
+  border-radius: 30px; /* Fully rounded button */
+  cursor: pointer;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3); /* Subtle shadow */
+  transition: background-color 0.3s, color 0.3s;
 }
 .back-btn {
-  margin-right: 3%;
+  margin-left: 3%;
+
+  border: none;
+  border-radius: 30px; /* Fully rounded button */
+  cursor: pointer;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3); /* Subtle shadow */
+  transition: background-color 0.3s, color 0.3s;
 }
 
 .home-btn:hover {
@@ -101,8 +105,19 @@ body {
 .next-btn:disabled {
   transform: none; /* Removes the scaling effect. */
   box-shadow: none; /* Removes the shadow effect */
-  opacity: 0.6; /* Butonun daha az belirgin görünmesi için */
+  opacity: 0.6;
   transition: none; /* Disables any animation or transition effects */
+}
+@media (min-width: 1201px) {
+  .youtube-player-container {
+    width: 30vw; /* 70% of the viewport width */
+  }
+  .action-card {
+    width: 100%;
+  }
+  .video-name-header {
+    width: 100%;
+  }
 }
 
 /* Responsive styles for buttons */
@@ -112,10 +127,10 @@ body {
     font-size: 1.1rem;
   }
   .youtube-player-container {
-    width: 110%;
+    width: 100%;
   }
   .action-card {
-    width: 110%;
+    width: 100%;
   }
   .video-name-header {
     font-size: 1rem;
@@ -157,11 +172,14 @@ body {
     width: 100%;
   }
 
-  .video-name-header {
-    font-size: 0.8rem;
-  }
   .action-card {
     width: 100%;
+  }
+  .home-header {
+    font-size: 2em;
+  }
+  .video-name-header {
+    font-size: 0.8rem;
   }
 }
 
@@ -185,7 +203,7 @@ body {
 .action-card,
 .comedy-card,
 .drama-card,
-.thriller-card,
+.triller-card,
 .horror-card,
 .romance-card {
   border-radius: 10px;
@@ -246,7 +264,7 @@ body {
   color: white;
 }
 
-.thriller-btn {
+.triller-btn {
   background-color: #6e6e6e;
   color: white;
 }
@@ -294,6 +312,9 @@ body {
   margin: auto;
   border-radius: 10px;
   overflow: hidden;
+  position: relative;
+}
+.youtube-player-container {
   position: relative;
 }
 

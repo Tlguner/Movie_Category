@@ -1,13 +1,19 @@
 import express from "express";
-import { connectDB, Movie } from "../api/db.js";
+import { connectDB, Movie } from "./lib/db.js";
 import cors from "cors";
 import dotenv from "dotenv";
+import path from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const app = express();
+const PORT = process.env.PORT || 5000;
 
 // Load environment variables from .env file
 dotenv.config();
 
-const app = express();
-const PORT = process.env.PORT || 5000;
 // Connect to MongoDB
 connectDB();
 

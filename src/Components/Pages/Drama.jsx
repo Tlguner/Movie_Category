@@ -13,6 +13,8 @@ function Drama() {
     const fetchMovies = async () => {
       try {
         const response = await axios.get("/api/movies");
+        console.log("API Response:", response);
+        console.log("Response data:", response.data);
         const filteredMovies = response.data.filter(
           (movie) => movie.category === "Drama"
         );

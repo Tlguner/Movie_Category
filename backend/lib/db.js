@@ -26,35 +26,36 @@ const connectDB = async () => {
 };
 */
 
-// Load environment variables from .env file
 dotenv.config();
 
-// Film şeması
+const MONGO_URI = process.env.MONGO_URI;
+console.log("MongoDB URI:", MONGO_URI); // yerelde test için
+
+let isConnected = false;
+
+const connectDB = async () => {
+  if (isConnected) return; // tekrar bağlantı yapılmaz
+
+  try {
+    await mongoose.connect(MONGO_URI, {
+      dbName: "test", // veritabanı adı URI içinde yoksa burada tanımlanır
+    });
+
+    isConnected = true;
+    console.log("✅ MongoDB connected");
+  } catch (err) {
+    console.error("❌ MongoDB connection error:", err.message);
+    throw err;
+  }
+};
+
+// Tekrar model tanımını önle
 const movieSchema = new mongoose.Schema({
   title: String,
   url: String,
   category: String,
 });
 
-// MongoDB Atlas connection URI
-const MONGO_URI = process.env.MONGO_URI;
-console.log("MongoDB URI:", MONGO_URI); // Check if this logs correctly
-
-// MongoDB'ye bağlanma fonksiyonu
-const connectDB = async () => {
-  try {
-    await mongoose.connect(MONGO_URI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
-    console.log("MongoDB connected...");
-  } catch (err) {
-    console.error(err.message);
-    process.exit(1);
-  }
-};
-
-// Şemadan model oluştur
-const Movie = mongoose.model("movie", movieSchema);
+const Movie = mongoose.models.Movie || mongoose.model("movies", movieSchema);
 
 export { connectDB, Movie };

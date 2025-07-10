@@ -1,5 +1,5 @@
 import express from "express";
-import { connectDB, Movie } from "./lib/db.js";
+import { connectDB, Movie } from "../api/db.js";
 import cors from "cors";
 import dotenv from "dotenv";
 import path from "path";
